@@ -38,9 +38,25 @@ uint8_t AF_GPIO)
     _speedGPIO = speedGPIO;
     _otypeGPIO = otypeGPIO;
     _pupdGPIO = pupdGPIO;
-
+		
+		if( _pinNumber == GPIO_Pin_0) { _pinSourceGPIO = GPIO_PinSource0;}
+	else if( _pinNumber == GPIO_Pin_1)  {_pinSourceGPIO = GPIO_PinSource1;}
+	else if( _pinNumber == GPIO_Pin_2)  {_pinSourceGPIO = GPIO_PinSource2;}
+	else if( _pinNumber == GPIO_Pin_3)  {_pinSourceGPIO = GPIO_PinSource3;}
+	else if( _pinNumber == GPIO_Pin_4)  {_pinSourceGPIO = GPIO_PinSource4;}
+	else if( _pinNumber == GPIO_Pin_5)  {_pinSourceGPIO = GPIO_PinSource5;}
+	else if( _pinNumber == GPIO_Pin_6)  {_pinSourceGPIO = GPIO_PinSource6;}
+	else if( _pinNumber == GPIO_Pin_7)  {_pinSourceGPIO = GPIO_PinSource7;}
+	else if( _pinNumber == GPIO_Pin_8)  {_pinSourceGPIO = GPIO_PinSource8;}
+	else if( _pinNumber == GPIO_Pin_9)  {_pinSourceGPIO = GPIO_PinSource9;}
+	else if( _pinNumber == GPIO_Pin_10)  {_pinSourceGPIO = GPIO_PinSource10;}
+	else if( _pinNumber == GPIO_Pin_11)  {_pinSourceGPIO = GPIO_PinSource11;}
+	else if( _pinNumber == GPIO_Pin_12)  {_pinSourceGPIO = GPIO_PinSource12;}
+	else if( _pinNumber == GPIO_Pin_13)  {_pinSourceGPIO = GPIO_PinSource13;}
+	else if( _pinNumber == GPIO_Pin_14)  {_pinSourceGPIO = GPIO_PinSource14;}
+	else if( _pinNumber == GPIO_Pin_15)  {_pinSourceGPIO = GPIO_PinSource15;}
     if(_modeGPIO == GPIO_Mode_AF){
-        GPIO_PinAFConfig(_GPIOx, _pinNumber, AF_GPIO);
+        GPIO_PinAFConfig(_GPIOx, _pinSourceGPIO, AF_GPIO);
     }
     
 }

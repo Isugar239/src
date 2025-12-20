@@ -31,6 +31,7 @@ class GPIO
 	GPIOSpeed_TypeDef _speedGPIO;
 	GPIOOType_TypeDef _otypeGPIO;
 	GPIOPuPd_TypeDef _pupdGPIO;
+	uint16_t _pinSourceGPIO;		
 	uint8_t _ch;
 	TIM_TypeDef* _TIMx;
 	uint16_t _pwmPeriod; // Период ШИМ для вычисления скважности

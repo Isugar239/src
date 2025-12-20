@@ -16,7 +16,8 @@ int main()
 	
 	while(1){
 		TimeHandler::delay_ms(1000);
-		usart6::write(49); 
+		uint16_t data = usart6::read();
+ 		usart6::write(49); 
 	}
 
 }
