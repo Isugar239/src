@@ -19,11 +19,10 @@ namespace usart6
       USART_InitTypeDef u6;
 		  RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
 
-      
-      
-      u6.USART_BaudRate = 115200;
-      u6.USART_WordLength = USART_WordLength_8b;
-      u6.USART_StopBits = USART_StopBits_1;
+      // Используем переданные параметры
+      u6.USART_BaudRate = speed;
+      u6.USART_WordLength = (word_length == 9) ? USART_WordLength_9b : USART_WordLength_8b;
+      u6.USART_StopBits = (stop_bits == 2.0) ? USART_StopBits_2 : USART_StopBits_1;
       u6.USART_Parity = USART_Parity_No;
       u6.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
       u6.USART_Mode = USART_Mode_Tx | USART_Mode_Rx ;
