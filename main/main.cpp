@@ -13,11 +13,11 @@ int main()
 	GPIO TX_pin = GPIO(GPIOC, GPIO_Pin_7, GPIO_Mode_AF, GPIO_Speed_100MHz, GPIO_OType_PP, GPIO_PuPd_UP, GPIO_AF_USART6);
 
 	usart6::usart6Init(115200, 8, 1.0);
-	
+	volatile uint16_t data;
 	while(1){
-		TimeHandler::delay_ms(1000);
-		uint16_t data = usart6::read();
- 		usart6::write(49); 
+		TimeHandler::delay_ms(1);
+		 data = usart6::read();
+ 		usart6::write(52); 
 	}
 
 }
