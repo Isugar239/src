@@ -24,8 +24,13 @@ extern "C" void USART6_IRQHandler(void)
         else {
             usart6::rx[usart6::_rxCount] = USART_ReceiveData(USART6);//Иначе прочитай байт и смести указатель в массиве
             usart6::_rxCount++;
-            if (usart6::_rxCount >= 30)
+            usart6::_bytesToRead++;
+            if (usart6::_bytesToRead > 30) {
+                usart6::_bytesToRead = 30;
+            }
+            if (usart6::_rxCount >= 30) {
                 usart6::_rxCount = 0;
+            }
         }
     }
 }
@@ -45,6 +50,7 @@ namespace usart6
     volatile uint16_t _readCount;
     volatile uint16_t _sendCount;
 
+    volatile uint8_t _bytesToRead;
     volatile uint8_t _bytesToSend;
     volatile uint32_t _tets;
     //very important thing!!!
@@ -60,6 +66,9 @@ namespace usart6
     // read from our buffer
     uint16_t read()
     {
+        if (_bytesToRead == 0) {
+            return 0; // Нет данных для чтения
+        }
         uint16_t data;
         ENTER_CRITICAL_SECTION();
         data = rx[_readCount];
@@ -67,10 +76,9 @@ namespace usart6
         if (_readCount >= 30) {
             _readCount = 0;
         }
+        _bytesToRead--;
         EXIT_CRITICAL_SECTION();
         return data;
-        while (USART_GetFlagStatus(USART6, USART_FLAG_RXNE) == RESET);
-        return USART_ReceiveData(USART6);
     }
 
     //look
@@ -85,16 +93,7 @@ namespace usart6
 
     uint16_t available()
     {
-        uint16_t size;
-        ENTER_CRITICAL_SECTION();
-        if (_readCount <= _rxCount) {
-            size = _rxCount - _readCount;
-        }
-        else {
-            size = 30 - _readCount + _rxCount;
-        }
-        EXIT_CRITICAL_SECTION();
-        return size;
+        return _bytesToRead; // Просто возвращаем количество байт для чтения
     }
 
     void usart6Init(uint32_t speed, uint8_t word_length, float stop_bits)
@@ -104,6 +103,7 @@ namespace usart6
         flag = 1;
         _readCount = 0;
         _sendCount = 0;
+        _bytesToRead = 0;
         _bytesToSend = 0;
         _receiver_buffer_overflow_warning = false;
         USART_InitTypeDef u6;

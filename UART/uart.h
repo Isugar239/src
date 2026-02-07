@@ -19,6 +19,7 @@ namespace usart6
 	extern volatile uint16_t _readCount;
 	extern volatile uint16_t _sendCount;
 	
+	extern volatile uint8_t _bytesToRead;
 	extern volatile uint8_t _bytesToSend;
 	extern volatile uint32_t _tets;
 	//very important thing!!!
