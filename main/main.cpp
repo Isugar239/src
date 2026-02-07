@@ -4,6 +4,7 @@
 #include "../Time/Time.h"
 
 int main()
+
 {
   SystemInit(); 
   TimeHandler::init();
@@ -20,5 +21,24 @@ int main()
  		usart6::write(52); 
 	}
 
+}
+
+
+uint8_t crc8(uint8_t* data, int len)
+{
+uint8_t src8 = 0xFF;
+
+	for(int i = 0; i < len; i++){
+		src8 ^= data[i];
+		for(int j = 0; j < 8; j++){
+		if(src8 & 0x80) {
+		src8 = (char)((src8<<1) ^ 0x31) ;
+		}
+		else{
+		src8 <<= 1;
+		}
+		}
+	}
+	return src8;
 }
 
