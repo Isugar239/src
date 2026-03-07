@@ -69,6 +69,18 @@ void GPIO::writeGPIO(uint32_t pin, bool value){
     }
 }
 
+void GPIO::setBit(){
+    GPIO_SetBits(_GPIOx, _pinNumber);
+}
+
+void GPIO::resetBit(){
+    GPIO_ResetBits(_GPIOx, _pinNumber);
+}
+
+bool GPIO::readBit() const{
+    return GPIO_ReadInputDataBit(_GPIOx, _pinNumber) == Bit_SET;
+}
+
 void GPIO::pwmInit(uint8_t RCC_TIMx, uint16_t prescaller, uint16_t period, uint8_t channel, TIM_TypeDef* TIMx){
     _ch = channel;
     _TIMx = TIMx;

@@ -17,6 +17,9 @@ class GPIO
 	void setOType(GPIOOType_TypeDef otypeGPIO);
 	void setPUPD(GPIOPuPd_TypeDef pupdGPIO);
 	void writeGPIO(uint32_t pin, bool value);
+	void setBit();
+	void resetBit();
+	bool readBit() const;
 	void pwmInit(uint8_t RCC_TIMx, uint16_t prescaller, uint16_t period, uint8_t channel, TIM_TypeDef* TIMx);
 	void pwm(uint32_t pulse);
 	void pwmSetDutyCycle(uint8_t dutyCycle); // Установка скважности в процентах (0-100)
