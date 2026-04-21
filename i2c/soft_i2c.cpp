@@ -206,8 +206,7 @@ uint8_t soft_i2c::readRegister(uint8_t addr, uint8_t reg) {
         write((addrWrite & 0x80));
         addrWrite <<= 1;
     }
-    sclLow(); delay(35);
-    readAck();
+     readAck();
 
     uint8_t regCopy = reg;
     for (int i = 0; i < 8; i++) {
